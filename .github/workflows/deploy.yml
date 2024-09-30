@@ -82,7 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: innei-dev/shiroi
+          repository: bin64/shiroi
           token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
           fetch-depth: 0
           lfs: true
@@ -206,11 +206,11 @@ jobs:
             pm2 save
             echo "Deployed successfully"
 
-      - name: After deploy script
-        run: |
-          hash=${{ needs.build.outputs.sha_short }}
-          # curl -X "POST" "https://mx.innei.in/api/v2/fn/shiro/new-version-hook" -H 'Content-Type: application/json' -d "{\"hash\": \"$hash\", \"key\": \"\"}"
-          ${{ secrets.AFTER_DEPLOY_SCRIPT }}
+      # - name: After deploy script
+      #   run: |
+      #     hash=${{ needs.build.outputs.sha_short }}
+      #     # curl -X "POST" "https://mx.innei.in/api/v2/fn/shiro/new-version-hook" -H 'Content-Type: application/json' -d "{\"hash\": \"$hash\", \"key\": \"\"}"
+      #     ${{ secrets.AFTER_DEPLOY_SCRIPT }}
   store:
     name: Store artifact commit version
     runs-on: ubuntu-latest
